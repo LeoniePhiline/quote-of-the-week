@@ -1,7 +1,8 @@
 use std::{fs, path::Path};
 
-use color_eyre::eyre::{Result, WrapErr};
+use color_eyre::eyre::{eyre, Result, WrapErr};
 use gix::Repository;
+use nom::{branch::alt, bytes::complete::take_until};
 
 fn main() -> Result<()> {
     let dest = Path::new(concat!(env!("CARGO_MANIFEST_DIR"), "/this-week-in-rust"));
@@ -9,6 +10,9 @@ fn main() -> Result<()> {
     println!("Setting up repository...");
     let _repo = git_clone_or_open("https://github.com/rust-lang/this-week-in-rust.git", dest)?;
 
+    let mut collection = Vec::new();
+
+    println!("Collecting quotes of the week...");
     for entry in fs::read_dir(dest.join("content"))? {
         let entry = entry?;
         let path = entry.path();
@@ -28,10 +32,64 @@ fn main() -> Result<()> {
             continue;
         }
 
-        println!("{}", path.display());
+        let content = fs::read_to_string(&path)?;
+
+        match extract_quote_of_the_week(&content)? {
+            Some(quote) => collection.push((path, Some(quote.to_string()))),
+
+            None => collection.push((path, None)),
+        };
     }
 
+    let total = collection.len();
+    println!(
+        "Found {} quotes of the week in {total} editions:",
+        collection
+            .iter()
+            .filter(|(_, maybe)| maybe.is_some())
+            .count()
+    );
+    println!("{collection:#?}");
+
     Ok(())
+}
+
+/// Extracts the quote from the input string slice.
+///
+/// Returns `None` if no quote could be found.
+///
+/// Returns an error if a quote was found, but it was not terminated.
+fn extract_quote_of_the_week(input: &str) -> Result<Option<&str>> {
+    let Some(input) = find_quote(input) else {
+        return Ok(None);
+    };
+
+    Ok(Some(take_quote(input)?))
+}
+
+/// Skip all text until the start-of-quote marker.
+///
+/// Returns `None` if start-of-quote marker was not found.
+fn find_quote(input: &str) -> Option<&str> {
+    match take_until::<&str, &str, nom::error::Error<&str>>("# Quote of the Week\n\n")(input) {
+        Ok((input, _)) => Some(input),
+        Err(_) => None, // TakeUntil error -> Quote not found.
+    }
+}
+
+/// Take all text until one of three canonical end-of-quote markers.
+///
+/// Returns an error if no end-of-quote marker was found.
+fn take_quote(input: &str) -> Result<&str> {
+    match alt((
+        take_until::<&str, &str, nom::error::Error<&str>>("[Please submit"),
+        take_until::<&str, &str, nom::error::Error<&str>>("[Submit"),
+        take_until::<&str, &str, nom::error::Error<&str>>("\n\n# "),
+    ))(input)
+    {
+        Ok((_, quote)) => Ok(quote),
+        Err(err) => Err(eyre!("failed to find end of quote: {err:?}")),
+    }
 }
 
 /// Try to open repository at `dest`, if directory exists,
