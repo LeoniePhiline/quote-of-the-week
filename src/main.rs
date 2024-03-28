@@ -1,13 +1,35 @@
-use std::path::Path;
+use std::{fs, path::Path};
 
 use color_eyre::eyre::{Result, WrapErr};
 use gix::Repository;
 
 fn main() -> Result<()> {
-    let dest = Path::new("this-week-in-rust");
+    let dest = Path::new(concat!(env!("CARGO_MANIFEST_DIR"), "/this-week-in-rust"));
 
     println!("Setting up repository...");
     let _repo = git_clone_or_open("https://github.com/rust-lang/this-week-in-rust.git", dest)?;
+
+    for entry in fs::read_dir(dest.join("content"))? {
+        let entry = entry?;
+        let path = entry.path();
+        if !path.is_file() {
+            continue;
+        }
+
+        let Some(ext) = path.extension() else {
+            continue;
+        };
+
+        let Some(ext) = ext.to_str() else {
+            continue;
+        };
+
+        if !matches!(ext, "md" | "markdown") {
+            continue;
+        }
+
+        println!("{}", path.display());
+    }
 
     Ok(())
 }
