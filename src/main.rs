@@ -109,10 +109,15 @@ fn extract_quote_of_the_week(input: &str) -> Result<Option<&str>> {
 ///
 /// Returns `None` if start-of-quote marker was not found.
 fn find_quote(input: &str) -> Option<&str> {
-    match take_until::<&str, &str, nom::error::Error<&str>>("# Quote of the Week\n\n")(input) {
-        Ok((input, _)) => Some(input),
-        Err(_) => None, // TakeUntil error -> Quote not found.
-    }
+    let start = "# Quote of the Week\n\n";
+    let input = match take_until::<&str, &str, nom::error::Error<&str>>(start)(input) {
+        Ok((input, _)) => input,
+        Err(_) => return None, // TakeUntil error -> Quote not found.
+    };
+
+    let (input, _) = tag::<&str, &str, nom::error::Error<&str>>(start)(input).unwrap();
+
+    Some(input)
 }
 
 /// Take all text until one of three canonical end-of-quote markers.
@@ -125,7 +130,7 @@ fn take_quote(input: &str) -> Result<&str> {
         take_until::<&str, &str, nom::error::Error<&str>>("\n\n# "),
     ))(input)
     {
-        Ok((_, quote)) => Ok(quote),
+        Ok((_, quote)) => Ok(quote.trim()),
         Err(err) => Err(eyre!("failed to find end of quote: {err:?}")),
     }
 }
