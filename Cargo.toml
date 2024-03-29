@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-# clap = { version = "4.5.4", features = ["derive", "wrap_help"] }
+chrono = { version = "0.4.37", default-features = false }
 color-eyre = "0.6.3"
 gix = { version = "0.61.0", features = ["blocking-http-transport-reqwest-rust-tls"] }
 nom = "7.1.3"

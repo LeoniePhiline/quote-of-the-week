@@ -1,8 +1,15 @@
 use std::{fs, path::Path};
 
+use chrono::NaiveDate;
 use color_eyre::eyre::{eyre, Result, WrapErr};
 use gix::Repository;
-use nom::{branch::alt, bytes::complete::take_until};
+use nom::{
+    branch::alt,
+    bytes::complete::{tag, take_until},
+    character::complete::digit1,
+    combinator::map_res,
+    sequence::tuple,
+};
 
 fn main() -> Result<()> {
     let dest = Path::new(concat!(env!("CARGO_MANIFEST_DIR"), "/this-week-in-rust"));
@@ -34,10 +41,17 @@ fn main() -> Result<()> {
 
         let content = fs::read_to_string(&path)?;
 
-        match extract_quote_of_the_week(&content)? {
-            Some(quote) => collection.push((path, Some(quote.to_string()))),
+        let date = parse_date(
+            path.file_name()
+                .ok_or_else(|| eyre!("path '{}' had no file name", path.display()))?
+                .to_str()
+                .ok_or_else(|| eyre!("path '{}' had non UTF-8 file name", path.display()))?,
+        )?;
 
-            None => collection.push((path, None)),
+        match extract_quote_of_the_week(&content)? {
+            Some(quote) => collection.push((date, Some(quote.to_string()))),
+
+            None => collection.push((date, None)),
         };
     }
 
@@ -49,9 +63,33 @@ fn main() -> Result<()> {
             .filter(|(_, maybe)| maybe.is_some())
             .count()
     );
-    println!("{collection:#?}");
+
+    println!("# Quotes of the week\n");
+    collection.into_iter().for_each(|(date, maybe_quote)| {
+        if let Some(quote) = maybe_quote {
+            println!("## {date} - Quote of the Week\n");
+            println!("{quote}\n\n");
+        } else {
+            println!("## {date}\n");
+            println!("_No Quote of the Week._\n")
+        }
+    });
 
     Ok(())
+}
+
+fn parse_date(input: &str) -> Result<chrono::NaiveDate> {
+    let (_, (year, _, month, _, day)) = tuple((
+        map_res(digit1::<&str, nom::error::Error<&str>>, str::parse::<i32>),
+        tag("-"),
+        map_res(digit1::<&str, nom::error::Error<&str>>, str::parse::<u32>),
+        tag("-"),
+        map_res(digit1::<&str, nom::error::Error<&str>>, str::parse::<u32>),
+    ))(input)
+    .map_err(|err| eyre!("failed to match date from input '{input}': {err:#?}"))?;
+
+    NaiveDate::from_ymd_opt(year, month, day)
+        .ok_or_else(|| eyre!("not a valid date: '{year}-{month}-{day}'"))
 }
 
 /// Extracts the quote from the input string slice.
