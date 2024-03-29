@@ -11,17 +11,20 @@ use nom::{
 };
 
 fn main() -> Result<()> {
+    // Prepare repository
     let dest = Path::new(concat!(env!("CARGO_MANIFEST_DIR"), "/this-week-in-rust"));
 
     println!("Setting up repository...");
     git_clone_or_open("https://github.com/rust-lang/this-week-in-rust.git", dest)?;
 
+    // Walk repository and parse files
+    println!("Collecting quotes of the week...");
     let mut collection = Vec::new();
 
-    println!("Collecting quotes of the week...");
     for entry in fs::read_dir(dest.join("content"))? {
         let entry = entry?;
         let path = entry.path();
+
         if !path.is_file() {
             continue;
         }
@@ -38,8 +41,10 @@ fn main() -> Result<()> {
             continue;
         }
 
+        // Read markdown file
         let content = fs::read_to_string(&path)?;
 
+        // Extract edition date from file name
         let date = parse_date(
             path.file_name()
                 .ok_or_else(|| eyre!("path '{}' had no file name", path.display()))?
@@ -47,6 +52,8 @@ fn main() -> Result<()> {
                 .ok_or_else(|| eyre!("path '{}' had non UTF-8 file name", path.display()))?,
         )?;
 
+        // Extract quote of the week,
+        // if present in edition content
         match extract_quote_of_the_week(&content)? {
             Some(quote) => collection.push((date, Some(quote.to_string()))),
 
@@ -54,8 +61,10 @@ fn main() -> Result<()> {
         };
     }
 
+    // Sort results
     collection.sort_unstable_by_key(|entry| entry.0);
 
+    // Print results
     let total = collection.len();
     println!(
         "Found {} quotes of the week in {total} editions:",
@@ -79,6 +88,10 @@ fn main() -> Result<()> {
     Ok(())
 }
 
+/// Parse a chrono naive date without timezone
+/// from the provided (this week in rust edition file name) string slice.
+///
+/// Returns an error if the input does not start with a date in ISO format "YYYY-MM-DD".
 fn parse_date(input: &str) -> Result<chrono::NaiveDate> {
     let (_, (year, _, month, _, day)) = tuple((
         map_res(digit1::<&str, nom::error::Error<&str>>, str::parse::<i32>),
@@ -106,16 +119,19 @@ fn extract_quote_of_the_week(input: &str) -> Result<Option<&str>> {
     Ok(Some(take_quote(input)?))
 }
 
-/// Skip all text until the start-of-quote marker.
+/// Skip all text until and including the start-of-quote marker.
 ///
 /// Returns `None` if start-of-quote marker was not found.
 fn find_quote(input: &str) -> Option<&str> {
     let start = "# Quote of the Week\n\n";
+
+    // Skip all text until the start-of-quote marker.
     let input = match take_until::<&str, &str, nom::error::Error<&str>>(start)(input) {
         Ok((input, _)) => input,
         Err(_) => return None, // TakeUntil error -> Quote not found.
     };
 
+    // Consume the marker, removing it from the parseable remainder.
     let (input, _) = tag::<&str, &str, nom::error::Error<&str>>(start)(input).unwrap();
 
     Some(input)
@@ -139,7 +155,8 @@ fn take_quote(input: &str) -> Result<&str> {
 /// Try to open repository at `dest`, if directory exists,
 /// otherwise clone from remote url `src` into local directory `dest`.
 fn git_clone_or_open(src: &str, dest: &Path) -> Result<()> {
-    // SAFETY: The closure doesn't use mutexes or memory allocation, so it should be safe to call from a signal handler.
+    // SAFETY: The closure doesn't use mutexes or memory allocation,
+    //         so it should be safe to call from a signal handler.
     unsafe {
         gix::interrupt::init_handler(1, || {})?;
     }
