@@ -94,13 +94,15 @@ fn main() -> Result<()> {
 /// Returns an error if the input does not start with a date in ISO format "YYYY-MM-DD".
 fn parse_date(input: &str) -> Result<chrono::NaiveDate> {
     let (_, (year, _, month, _, day)) = tuple((
-        map_res(digit1::<&str, nom::error::Error<&str>>, str::parse::<i32>),
+        map_res(digit1, str::parse::<i32>),
         tag("-"),
-        map_res(digit1::<&str, nom::error::Error<&str>>, str::parse::<u32>),
+        map_res(digit1, str::parse::<u32>),
         tag("-"),
-        map_res(digit1::<&str, nom::error::Error<&str>>, str::parse::<u32>),
+        map_res(digit1, str::parse::<u32>),
     ))(input)
-    .map_err(|err| eyre!("failed to match date from input '{input}': {err:#?}"))?;
+    .map_err(|err: nom::Err<nom::error::Error<&str>>| {
+        eyre!("failed to match date from input '{input}': {err:#?}")
+    })?;
 
     NaiveDate::from_ymd_opt(year, month, day)
         .ok_or_else(|| eyre!("not a valid date: '{year}-{month}-{day}'"))
@@ -126,9 +128,9 @@ fn find_quote(input: &str) -> Option<&str> {
     let start = "# Quote of the Week\n\n";
 
     // Skip all text until the start-of-quote marker.
-    let input = match take_until::<&str, &str, nom::error::Error<&str>>(start)(input) {
+    let input = match take_until(start)(input) {
         Ok((input, _)) => input,
-        Err(_) => return None, // TakeUntil error -> Quote not found.
+        Err::<_, nom::Err<nom::error::Error<&str>>>(_) => return None, // TakeUntil error -> Quote not found.
     };
 
     // Consume the marker, removing it from the parseable remainder.
@@ -142,13 +144,15 @@ fn find_quote(input: &str) -> Option<&str> {
 /// Returns an error if no end-of-quote marker was found.
 fn take_quote(input: &str) -> Result<&str> {
     match alt((
-        take_until::<&str, &str, nom::error::Error<&str>>("[Please submit"),
-        take_until::<&str, &str, nom::error::Error<&str>>("[Submit"),
-        take_until::<&str, &str, nom::error::Error<&str>>("\n\n# "),
+        take_until("[Please submit"),
+        take_until("[Submit"),
+        take_until("\n\n# "),
     ))(input)
     {
         Ok((_, quote)) => Ok(quote.trim()),
-        Err(err) => Err(eyre!("failed to find end of quote: {err:?}")),
+        Err::<_, nom::Err<nom::error::Error<&str>>>(err) => {
+            Err(eyre!("failed to find end of quote: {err:?}"))
+        }
     }
 }
 
