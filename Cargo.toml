@@ -41,3 +41,18 @@ pedantic = "warn"
 cargo = "warn"
 multiple_crate_versions = { level = "allow", priority = 1 }
 
+[profile.dev]
+debug = 1 # Less precise locations.
+split-debuginfo="unpacked"
+
+[profile.dev.package."*"]
+debug = false # No debug symbols for deps.
+opt-level = 2 # Makes their code smaller too.
+
+[profile.dev.build-override]
+opt-level = 3
+
+[profile.release]
+lto = true
+debug = 1   # Keep debug symbols for now; less precise locations.
+# strip = true # Automatically strip symbols.
