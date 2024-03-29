@@ -10,4 +10,4 @@ pre-release-replacements = [
   {file="CHANGELOG.md", search="<!-- next-url -->", replace="<!-- next-url -->\n[Unreleased]: https://github.com/LeoniePhiline/twir-qotw-scraper/compare/{{tag_name}}...HEAD", exactly=1},
 ]
 pre-release-commit-message = "release: {{version}}"
-pre-release-hook = ["cargo", "test"]
+pre-release-hook = ["cargo", "nextest", "run"]

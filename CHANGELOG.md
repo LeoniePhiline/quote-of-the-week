@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] <!-- release-date -->
 
+### Changed
+
+- Replace `pre-release-hook` `cargo test` with `cargo nextest run`.
+
 ## [0.1.3] - 2024-03-29
 
 ### Added
@@ -45,8 +49,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial implementation in Berlin Rust Hack and Learn 2024-03-28.
 
 <!-- next-url -->
-[Unreleased]: https://github.com/LeoniePhiline/twir-qotw-scraper/compare/v0.1.3...HEAD
 
+[Unreleased]: https://github.com/LeoniePhiline/twir-qotw-scraper/compare/v0.1.3...HEAD
 [0.1.3]: https://github.com/LeoniePhiline/twir-qotw-scraper/compare/v0.1.2...v0.1.3
 [0.1.2]: https://github.com/LeoniePhiline/twir-qotw-scraper/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/LeoniePhiline/twir-qotw-scraper/compare/v0.1.0...v0.1.1
