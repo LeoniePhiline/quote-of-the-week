@@ -10,7 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  build:
+  check:
     runs-on: ubuntu-latest
 
     steps:
@@ -19,8 +19,12 @@ jobs:
         run: cargo --locked fmt --check
       - name: Check code style
         run: cargo --locked clippy --all-features --all-targets -- --deny warnings
-      - name: Build
-        run: cargo --locked build --verbose
+
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
       - name: Install nextest
         uses: taiki-e/install-action@nextest
       - name: Run tests
