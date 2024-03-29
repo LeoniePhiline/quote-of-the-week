@@ -13,3 +13,31 @@ chrono = { version = "0.4.37", default-features = false }
 color-eyre = "0.6.3"
 gix = { version = "0.61.0", features = ["blocking-http-transport-reqwest-rust-tls"] }
 nom = "7.1.3"
+
+[lints.rust]
+elided_lifetimes_in_paths = "warn"
+future_incompatible = "warn"
+let_underscore = "warn"
+missing_copy_implementations = "warn"
+missing_debug_implementations = "warn"
+missing_docs = "warn"
+# must_not_suspend = "warn" # https://github.com/rust-lang/rust/issues/83310
+non_ascii_idents = "warn"
+nonstandard_style = "warn"
+noop_method_call = "warn"
+# unnameable_types = "warn" # https://github.com/rust-lang/rust/issues/48054
+unreachable_pub = "warn"
+unused = "warn"
+unused_crate_dependencies = "warn"
+unused_lifetimes = "warn"
+
+pointer_structural_match = "deny"
+# lossy_provenance_casts = "deny" # https://github.com/rust-lang/rust/issues/95228
+# fuzzy_provenance_casts = "deny" # https://github.com/rust-lang/rust/issues/95228
+unsafe_code = "deny" # Exceptions must be discussed and deemed indispensable and use `#![deny(invalid_reference_casting, unsafe_op_in_unsafe_fn)]`.
+
+[lints.clippy]
+pedantic = "warn"
+cargo = "warn"
+multiple_crate_versions = { level = "allow", priority = 1 }
+

@@ -1,3 +1,8 @@
+//! # This Week in Rust: _Quote of the Week_ scraper
+//!
+//! An ad-hoc, just-for-fun project
+//! of [Rust Hack and Learn Meetup Berlin](https://berline.rs/).
+
 use std::{fs, path::Path};
 
 use chrono::NaiveDate;
@@ -75,15 +80,15 @@ fn main() -> Result<()> {
     );
 
     println!("# Quotes of the week\n");
-    collection.into_iter().for_each(|(date, maybe_quote)| {
+    for (date, maybe_quote) in collection {
         if let Some(quote) = maybe_quote {
             println!("## {date} - Quote of the Week\n");
             println!("{quote}\n\n");
         } else {
             println!("## {date}\n");
-            println!("_No Quote of the Week._\n")
+            println!("_No Quote of the Week._\n");
         }
-    });
+    }
 
     Ok(())
 }
@@ -128,9 +133,8 @@ fn find_quote(input: &str) -> Option<&str> {
     let start = "# Quote of the Week\n\n";
 
     // Skip all text until the start-of-quote marker.
-    let input = match take_until(start)(input) {
-        Ok((input, _)) => input,
-        Err::<_, nom::Err<nom::error::Error<&str>>>(_) => return None, // TakeUntil error -> Quote not found.
+    let Ok((input, _)) = take_until::<&str, &str, nom::error::Error<&str>>(start)(input) else {
+        return None; // TakeUntil error -> Quote not found.
     };
 
     // Consume the marker, removing it from the parseable remainder.
@@ -161,6 +165,7 @@ fn take_quote(input: &str) -> Result<&str> {
 fn git_clone_or_open(src: &str, dest: &Path) -> Result<()> {
     // SAFETY: The closure doesn't use mutexes or memory allocation,
     //         so it should be safe to call from a signal handler.
+    #[allow(unsafe_code)]
     unsafe {
         gix::interrupt::init_handler(1, || {})?;
     }
