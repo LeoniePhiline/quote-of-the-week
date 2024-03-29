@@ -55,6 +55,8 @@ fn main() -> Result<()> {
         };
     }
 
+    collection.sort_unstable_by_key(|entry| entry.0);
+
     let total = collection.len();
     println!(
         "Found {} quotes of the week in {total} editions:",
