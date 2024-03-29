@@ -1,6 +1,6 @@
 [package]
 name = "twir-qotw-scraper"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 description = "An ad-hoc, just-for-fun project of Rust Hack and Learn Meetup Berlin."
 license = "CC0-1.0"

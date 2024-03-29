@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased] <!-- release-date -->
 
+## [0.1.2] - 2024-03-29
+
 ### Added
 
 - Add support for 2014-01-11 and 2014-01-18, which use a non-standard "Quotes of the Week" heading.
@@ -32,7 +34,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial implementation in Berlin Rust Hack and Learn 2024-03-28.
 
 <!-- next-url -->
+[Unreleased]: https://github.com/LeoniePhiline/twir-qotw-scraper/compare/v0.1.2...HEAD
 
-[Unreleased]: https://github.com/LeoniePhiline/twir-qotw-scraper/compare/v0.1.1...HEAD
+[0.1.2]: https://github.com/LeoniePhiline/twir-qotw-scraper/compare/v0.1.1...v0.1.2
 [0.1.1]: https://github.com/LeoniePhiline/twir-qotw-scraper/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/LeoniePhiline/twir-qotw-scraper/releases/tag/v0.1.0
