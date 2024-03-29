@@ -128,17 +128,31 @@ _No Quote of the Week._
 
 _No Quote of the Week._
 
-## 2014-01-11
+## 2014-01-11 - Quote of the Week
 
-_No Quote of the Week._
+"[I] find it easy to get lost in this file." -
+[kud1ing](https://github.com/mozilla/rust/pull/11472/files#r8810362) on
+`libc.rs`
+- "A language is more than just semantics, syntax, and an implementation -
+it's about an ecosystem and a community. Without that it dies." -
+[bjz](https://botbot.me/mozilla/rust-internals/msg/9689869/)
+
 
 ## 2014-01-12
 
 _No Quote of the Week._
 
-## 2014-01-18
+## 2014-01-18 - Quote of the Week
 
-_No Quote of the Week._
+{% blockquote tjc on the Rust-the-game/Rust-the-language confusion %}
+who says you can't make money selling a compiler? You can, as long as you
+convince people it's a video game
+{% endblockquote %}
+
+{% blockquote eddyb %}
+who needs pure functional when you have pure cool?
+{% endblockquote %}
+
 
 ## 2014-01-26
 

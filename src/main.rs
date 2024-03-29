@@ -131,14 +131,22 @@ fn extract_quote_of_the_week(input: &str) -> Result<Option<&str>> {
 /// Returns `None` if start-of-quote marker was not found.
 fn find_quote(input: &str) -> Option<&str> {
     let start = "# Quote of the Week\n\n";
+    let start_alt = "# Quotes of the Week\n\n";
 
     // Skip all text until the start-of-quote marker.
-    let Ok((input, _)) = take_until::<&str, &str, nom::error::Error<&str>>(start)(input) else {
+    let Ok((input, _)) = alt((
+        take_until::<&str, &str, nom::error::Error<&str>>(start),
+        take_until::<&str, &str, nom::error::Error<&str>>(start_alt),
+    ))(input) else {
         return None; // TakeUntil error -> Quote not found.
     };
 
     // Consume the marker, removing it from the parseable remainder.
-    let (input, _) = tag::<&str, &str, nom::error::Error<&str>>(start)(input).unwrap();
+    let (input, _) = alt((
+        tag::<&str, &str, nom::error::Error<&str>>(start),
+        tag::<&str, &str, nom::error::Error<&str>>(start_alt),
+    ))(input)
+    .unwrap();
 
     Some(input)
 }
