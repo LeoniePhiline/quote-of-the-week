@@ -218,3 +218,253 @@ fn git_clone(src: &str, dest: &Path) -> Result<()> {
 
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use chrono::NaiveDate;
+    use color_eyre::eyre::{OptionExt, Result};
+    use indoc::indoc;
+    use pretty_assertions::assert_eq;
+
+    use crate::{extract_quote_of_the_week, find_quote, git_clone_or_open, parse_date, take_quote};
+
+    use super::git_clone;
+
+    #[test]
+    fn clones_repo() -> Result<()> {
+        let temp_dir = tempfile::tempdir()?;
+        let dest = temp_dir.path().join("this-week-in-rust");
+
+        git_clone("https://github.com/rust-lang/this-week-in-rust.git", &dest)?;
+
+        assert_eq!(dest.join(".git").is_dir(), true);
+
+        Ok(())
+    }
+
+    #[test]
+    fn refuses_to_clone_if_dir_exists() -> Result<()> {
+        let temp_dir = tempfile::tempdir()?;
+        let dest = temp_dir.path().join("this-week-in-rust");
+
+        std::fs::create_dir(&dest)?;
+        std::fs::File::create_new(dest.join("not-empty"))?;
+
+        let err =
+            git_clone("https://github.com/rust-lang/this-week-in-rust.git", &dest).unwrap_err();
+
+        assert_eq!(
+            err.root_cause()
+                .to_string()
+                .starts_with("Refusing to initialize the non-empty directory as"),
+            true
+        );
+
+        Ok(())
+    }
+
+    #[test]
+    fn opens_existing_repo() -> Result<()> {
+        // Opening self not fail.
+        git_clone_or_open("<invalid>", &std::env::current_dir()?)?;
+
+        Ok(())
+    }
+
+    #[test]
+    fn parses_valid_date() -> Result<()> {
+        let date = parse_date("2024-03-29-foo-bar")?;
+
+        assert_eq!(
+            date,
+            NaiveDate::from_ymd_opt(2024, 3, 29).ok_or_eyre("2024-03-29 is a valid date")?
+        );
+
+        Ok(())
+    }
+
+    #[test]
+    fn fails_parsing_invalid_date() {
+        let err = parse_date("2024-03-no-day-foo-bar").unwrap_err();
+
+        assert_eq!(
+            err.root_cause().to_string(),
+            indoc! { r#"
+                failed to match date from input '2024-03-no-day-foo-bar': Error(
+                    Error {
+                        input: "no-day-foo-bar",
+                        code: Digit,
+                    },
+                )"# }
+        );
+    }
+
+    #[test]
+    fn fails_creating_invalid_date() {
+        let err = parse_date("2024-03-32-foo-bar").unwrap_err();
+
+        assert_eq!(
+            err.root_cause().to_string(),
+            "not a valid date: '2024-3-32'"
+        );
+    }
+
+    /// "Quote" without 's'.
+    #[test]
+    fn finds_quote_of_the_week_heading() {
+        let rest = find_quote(indoc! { r"
+            # This Week in Rust
+
+            Some text.
+
+            # Quote of the Week
+
+            > A quote
+
+            More text.
+        " });
+
+        assert_eq!(
+            rest,
+            Some(indoc! { "
+            > A quote
+
+            More text.
+            "})
+        );
+    }
+
+    /// "Quotes" with 's'.
+    #[test]
+    fn finds_quotes_of_the_week_heading() {
+        let rest = find_quote(indoc! { r"
+            # This Week in Rust
+
+            Some text.
+
+            # Quotes of the Week
+
+            > A quote
+
+            More text.
+        " });
+
+        assert_eq!(
+            rest,
+            Some(indoc! { "
+            > A quote
+
+            More text.
+            "})
+        );
+    }
+
+    /// "Quotes" with 's'.
+    #[test]
+    fn passes_if_no_quotes_of_the_week_heading() {
+        let rest = find_quote(indoc! { r"
+            # This Week in Rust
+
+            Some text.
+
+            # Some other heading
+
+            More text.
+        " });
+
+        assert_eq!(rest, None);
+    }
+
+    #[test]
+    fn takes_quote_trimmed_from_remainder_with_next_heading() -> Result<()> {
+        let quote = take_quote(indoc! { r"
+
+            > The quote.
+
+            By some author
+
+            # Next heading
+        " })?;
+
+        assert_eq!(
+            quote,
+            indoc! { r"
+            > The quote.
+
+            By some author"}
+        );
+
+        Ok(())
+    }
+
+    #[test]
+    fn takes_quote_trimmed_from_remainder_with_call_to_action() -> Result<()> {
+        let quote = take_quote(indoc! { r"
+
+            > The quote.
+
+            By some author
+
+            [Submit your quotes for next week][submit]!
+        " })?;
+
+        assert_eq!(
+            quote,
+            indoc! { r"
+            > The quote.
+
+            By some author"}
+        );
+
+        Ok(())
+    }
+
+    #[test]
+    fn takes_quote_trimmed_from_remainder_with_friendly_call_to_action() -> Result<()> {
+        let quote = take_quote(indoc! { r"
+
+            > The quote.
+
+            By some author
+
+            [Please submit quotes and vote for next week!](https://users.rust-lang.org/t/twir-quote-of-the-week/328)
+        " })?;
+
+        assert_eq!(
+            quote,
+            indoc! { r"
+            > The quote.
+
+            By some author"}
+        );
+
+        Ok(())
+    }
+
+    #[test]
+    fn extracts_quote_trimmed() -> Result<()> {
+        let quote = extract_quote_of_the_week(indoc! { r"
+            # This Week in Rust
+
+            Some text.
+
+            # Quote of the Week
+
+            > A quote
+
+            More text.
+
+            [Please submit quotes and vote for next week!](https://users.rust-lang.org/t/twir-quote-of-the-week/328)
+        " })?;
+
+        assert_eq!(
+            quote,
+            Some(indoc! { "
+            > A quote
+
+            More text."})
+        );
+
+        Ok(())
+    }
+}
