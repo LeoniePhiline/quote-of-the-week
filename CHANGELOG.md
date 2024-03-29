@@ -13,7 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add a ChangeLog.
 - Add `cargo release` configuration.
+
+### Changed
+
 - Change release tag schema from `X.Y.Z` to `vX.Y.Z` in accordance with `cargo release`.
+- Set package to `publish = false`, preventing accidental crates.io spam.
 
 ## [0.1.0] - 2024-03-29
 
