@@ -7,6 +7,7 @@ use std::{fs, path::Path};
 
 use chrono::NaiveDate;
 use color_eyre::eyre::{eyre, Result, WrapErr};
+use gix::sec::trust::DefaultForLevel;
 use nom::{
     branch::alt,
     bytes::complete::{tag, take_until},
@@ -194,8 +195,19 @@ fn git_clone(src: &str, dest: &Path) -> Result<()> {
     let url = gix::url::parse(src.into())?;
 
     println!("Cloning '{src}' into '{}'...", dest.display());
-    let (mut prepare_checkout, _) = gix::prepare_clone(url, dest)?
-        .fetch_then_checkout(gix::progress::Discard, &gix::interrupt::IS_INTERRUPTED)?;
+    let (mut prepare_checkout, _) = gix::clone::PrepareFetch::new(
+        url,
+        dest,
+        gix::create::Kind::WithWorktree,
+        gix::create::Options {
+            destination_must_be_empty: true,
+            ..Default::default()
+        },
+        gix::open::Options::default_for_level(gix::sec::Trust::Reduced),
+    )
+    .wrap_err("failed to prepare clone")?
+    .fetch_then_checkout(gix::progress::Discard, &gix::interrupt::IS_INTERRUPTED)
+    .wrap_err("failed to fetch, then checkout")?;
 
     println!(
         "Checking out into {:?} ...",
