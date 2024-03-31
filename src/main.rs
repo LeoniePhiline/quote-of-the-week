@@ -1,4 +1,4 @@
-//! # This Week in Rust: _Quote of the Week_ scraper
+//! # This Week in Rust: _Quote of the Week_
 //!
 //! An ad-hoc, just-for-fun project
 //! of [Rust Hack and Learn Meetup Berlin](https://berline.rs/).
