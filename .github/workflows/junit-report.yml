@@ -21,4 +21,4 @@ jobs:
         artifact: junit.xml
         name: 'JUnit report'
         path: junit.xml
-        reporter: jest-junit
+        reporter: java-junit
