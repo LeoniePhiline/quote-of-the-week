@@ -1,7 +1,7 @@
 # Documentation:
 # - https://nexte.st/book/configuration.html
 
-[profile.ci]
+[profile.default]
 
 # "failure-output" defines when standard output and standard error for failing tests are produced.
 # Accepted values are
@@ -20,9 +20,13 @@ failure-output = "final"
 # to false.
 fail-fast = false
 
-[profile.ci.junit]
+[profile.default.junit]
 
 # Output a JUnit report into the given file inside 'store.dir/<profile-name>'.
 # If unspecified, JUnit is not written out.
 path = "junit.xml"
+
+# Whether standard output and standard error for passing tests should be stored in the JUnit report.
+# Output is stored in the <system-out> and <system-err> elements of the <testcase> element.
+store-success-output = true
 

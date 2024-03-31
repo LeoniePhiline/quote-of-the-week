@@ -1,0 +1,24 @@
+name: 'JUnit report'
+
+on:
+  workflow_run:
+    workflows: ['CI']
+    types:
+      - completed
+
+permissions:
+  contents: read
+  actions: read
+  checks: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: dorny/test-reporter@v1
+      with:
+        artifact: junit.xml
+        name: 'JUnit report'
+        path: target/nextest/default/junit.xml
+        reporter: jest-junit
