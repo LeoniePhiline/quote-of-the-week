@@ -20,5 +20,5 @@ jobs:
       with:
         artifact: junit.xml
         name: 'JUnit report'
-        path: target/nextest/default/junit.xml
+        path: junit.xml
         reporter: jest-junit
