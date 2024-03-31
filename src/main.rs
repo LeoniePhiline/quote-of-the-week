@@ -383,7 +383,7 @@ mod tests {
 
             By some author
 
-            # Next heading
+            #Next heading
         " })?;
 
         assert_eq!(
