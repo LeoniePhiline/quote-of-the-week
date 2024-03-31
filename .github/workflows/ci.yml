@@ -1,4 +1,4 @@
-name: Rust
+name: CI
 
 on:
   push:
@@ -10,7 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  check:
+  Check:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
       - name: Check code style
         run: cargo --locked clippy --all-features --all-targets -- --deny warnings
 
-  test:
+  Test:
     runs-on: ubuntu-latest
 
     steps:
@@ -31,3 +31,8 @@ jobs:
         uses: taiki-e/install-action@cargo-llvm-cov
       - name: Run tests with coverage
         run: cargo --locked llvm-cov nextest
+      - uses: actions/upload-artifact@v3
+        if: success() || failure()
+        with:
+          name: junit.xml
+          path: target/nextest/default/junit.xml
