@@ -31,7 +31,14 @@ jobs:
         uses: taiki-e/install-action@cargo-llvm-cov
       - name: Run tests with coverage
         run: cargo --locked llvm-cov nextest
-      - uses: actions/upload-artifact@v3
+      - name: Upload event
+        uses: actions/upload-artifact@v4
+        if: success() || failure()
+        with:
+          name: event
+          path: ${{ github.event_path }}
+      - name: Upload JUnit artifact
+        uses: actions/upload-artifact@v4
         if: success() || failure()
         with:
           name: junit.xml
