@@ -10,7 +10,7 @@ env:
   CARGO_TERM_COLOR: always
 
 jobs:
-  check:
+  Check:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,7 +20,7 @@ jobs:
       - name: Check code style
         run: cargo --locked clippy --all-features --all-targets -- --deny warnings
 
-  test:
+  Test:
     runs-on: ubuntu-latest
 
     steps:
