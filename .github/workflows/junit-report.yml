@@ -16,10 +16,16 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: dorny/test-reporter@v1
-      with:
-        artifact: junit.xml
-        name: 'JUnit report'
-        fail-on-error: 'false'
-        path: junit.xml
-        reporter: java-junit
+      - uses: actions/checkout@v3
+      - uses: actions/download-artifact@v4
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          name: junit.xml
+          run-id: ${{ github.event.workflow_run.id }}
+          path: target/nextest/default/
+      - uses: dorny/test-reporter@v1
+        with:
+          fail-on-error: 'false'
+          name: 'JUnit report'
+          path: target/nextest/default/junit.xml
+          reporter: java-junit
