@@ -10,7 +10,7 @@ categories = ["command-line-utilities"]
 publish = false
 
 [dependencies]
-chrono = { version = "0.4.37", default-features = false }
+chrono = { version = "0.4.38", default-features = false }
 color-eyre = { version = "0.6.3", default-features = false, features = ["track-caller"] }
 gix = { version = "0.62.0", default-features = false, features = ["interrupt", "worktree-mutation", "blocking-http-transport-reqwest-rust-tls"] }
 nom = "7.1.3"
