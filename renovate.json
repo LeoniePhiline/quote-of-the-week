@@ -15,5 +15,16 @@
     "workarounds:all"
   ],
   "assignees": ["LeoniePhiline"],
-  "labels": ["dependencies"]
+  "labels": ["dependencies"],
+  "customManagers": [
+    {
+      "customType": "regex",
+      "fileMatch": ["scripts/.*?/.*?\\.z?sh"],
+      "matchStrings": [
+        "\\b(?<depName>ghcr\\.io/\\S+?):(?<currentValue>[a-z0-9.-]+)(?:@(?<currentDigest>sha256:[a-f0-9]+))?\\b"
+      ],
+      "datasourceTemplate": "docker",
+      "versioningTemplate": "docker"
+    }
+  ]
 }
