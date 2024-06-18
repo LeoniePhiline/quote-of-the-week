@@ -7,7 +7,7 @@ docker run \
   --volume "$PWD":/app \
   --workdir /app \
   --publish "8080:8080" \
-  ghcr.io/getzola/zola:v0.17.1@sha256:26fa853200306cfd39a93a8434e97f29f36ebddaeb698f832a436e08f8c615f0 \
+  ghcr.io/getzola/zola:v0.18.0@sha256:a514f95eb320062c4bb5a892d2ef8948bafa71279a45b9d7523d183abcdaa3dd \
   serve \
   --interface "0.0.0.0" \
   --port 8080 \
