@@ -22,18 +22,18 @@ tempfile = "3.10.1"
 
 [lints.rust]
 elided_lifetimes_in_paths = "warn"
-future_incompatible = "warn"
-let_underscore = "warn"
+future_incompatible = { level = "warn", priority = -1 }
+let_underscore = { level = "warn", priority = -1 }
 missing_copy_implementations = "warn"
 missing_debug_implementations = "warn"
 missing_docs = "warn"
 # must_not_suspend = "warn" # https://github.com/rust-lang/rust/issues/83310
 non_ascii_idents = "warn"
-nonstandard_style = "warn"
+nonstandard_style = { level = "warn", priority = -1 }
 noop_method_call = "warn"
 # unnameable_types = "warn" # https://github.com/rust-lang/rust/issues/48054
 unreachable_pub = "warn"
-unused = "warn"
+unused = { level = "warn", priority = -1 }
 unused_crate_dependencies = "warn"
 unused_lifetimes = "warn"
 
