@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="{{ lang }}">
+
+<head>
+  <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+
+  {% if config.generate_feed %}
+  <link rel="alternate" type={% if config.feed_filename=="atom.xml" %}"application/atom+xml"{% else
+    %}"application/rss+xml"{% endif %} title="RSS" href="{{ get_url(path=config.feed_filename) | safe }}">
+  {% endif %}
+
+  {% block extra_head %}
+  {% endblock extra_head %}
+</head>
+
+<body>
+  <div class="content container">
+    {% block content %}
+    {{ section.content | safe }}
+    <div class="posts">
+      {% for page in section.pages | reverse %}
+      <div class="post">
+        <h1 class="post-title">
+          <a href="{{ page.permalink }}">
+            {{ page.title | safe }}
+          </a>
+        </h1>
+
+        <span class="post-date">{{ page.date | date(format="%Y-%m-%d") }}</span>
+      </div>
+      {% endfor %}
+    </div>
+    {% endblock content %}
+  </div>
+
+</body>
+
+</html>
