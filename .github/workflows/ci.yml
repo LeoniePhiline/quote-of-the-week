@@ -32,11 +32,11 @@ jobs:
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
       - name: Install nextest
-        uses: taiki-e/install-action@30bcc3acc9b9fc2ef5216c3b9c1946223a581691 # v2
+        uses: taiki-e/install-action@ef2fb5af7d19da8885ee368c6bde2ae6d0758e3d # v2
         with:
           tool: nextest
       - name: Install cargo-llvm-cov
-        uses: taiki-e/install-action@30bcc3acc9b9fc2ef5216c3b9c1946223a581691 # v2
+        uses: taiki-e/install-action@ef2fb5af7d19da8885ee368c6bde2ae6d0758e3d # v2
         with:
           tool: cargo-llvm-cov
       - name: Run tests with coverage
