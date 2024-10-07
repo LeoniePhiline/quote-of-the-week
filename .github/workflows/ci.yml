@@ -13,7 +13,7 @@ jobs:
   Audit:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
       - uses: EmbarkStudios/cargo-deny-action@3f4a782664881cf5725d0ffd23969fcce89fd868 # v1
         with:
           command-arguments: --hide-inclusion-graph
@@ -21,7 +21,7 @@ jobs:
   Check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
       - name: Check formating
         run: cargo --locked fmt --check
       - name: Check code style
@@ -30,7 +30,7 @@ jobs:
   Test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4
+      - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # v4
       - name: Install nextest
         uses: taiki-e/install-action@f2b65a3e67b2ba5ed3b4a631b5e460896e975708 # v2
         with:
