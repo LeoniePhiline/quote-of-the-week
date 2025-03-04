@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-      - uses: EmbarkStudios/cargo-deny-action@d8395c1c8c9df74d968a3bcbba5533e396ff43cf # v2
+      - uses: EmbarkStudios/cargo-deny-action@4de59db63a066737e557c2c4dd3d1f70206de781 # v2
         with:
           command-arguments: --hide-inclusion-graph
 
