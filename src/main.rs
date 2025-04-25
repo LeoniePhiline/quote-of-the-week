@@ -13,7 +13,7 @@ use nom::{
     bytes::complete::{tag, take_until},
     character::complete::digit1,
     combinator::map_res,
-    sequence::tuple,
+    Parser,
 };
 
 fn main() -> Result<()> {
@@ -99,16 +99,17 @@ fn main() -> Result<()> {
 ///
 /// Returns an error if the input does not start with a date in ISO format "YYYY-MM-DD".
 fn parse_date(input: &str) -> Result<chrono::NaiveDate> {
-    let (_, (year, _, month, _, day)) = tuple((
+    let (_, (year, _, month, _, day)) = (
         map_res(digit1, str::parse::<i32>),
         tag("-"),
         map_res(digit1, str::parse::<u32>),
         tag("-"),
         map_res(digit1, str::parse::<u32>),
-    ))(input)
-    .map_err(|err: nom::Err<nom::error::Error<&str>>| {
-        eyre!("failed to match date from input '{input}': {err:#?}")
-    })?;
+    )
+        .parse(input)
+        .map_err(|err: nom::Err<nom::error::Error<&str>>| {
+            eyre!("failed to match date from input '{input}': {err:#?}")
+        })?;
 
     NaiveDate::from_ymd_opt(year, month, day)
         .ok_or_else(|| eyre!("not a valid date: '{year}-{month}-{day}'"))
@@ -138,7 +139,8 @@ fn find_quote(input: &str) -> Option<&str> {
     let Ok((input, _)) = alt((
         take_until::<&str, &str, nom::error::Error<&str>>(start),
         take_until::<&str, &str, nom::error::Error<&str>>(start_alt),
-    ))(input) else {
+    ))
+    .parse(input) else {
         return None; // TakeUntil error -> Quote not found.
     };
 
@@ -146,7 +148,8 @@ fn find_quote(input: &str) -> Option<&str> {
     let (input, _) = alt((
         tag::<&str, &str, nom::error::Error<&str>>(start),
         tag::<&str, &str, nom::error::Error<&str>>(start_alt),
-    ))(input)
+    ))
+    .parse(input)
     .unwrap();
 
     Some(input)
@@ -160,7 +163,8 @@ fn take_quote(input: &str) -> Result<&str> {
         take_until("[Please submit"),
         take_until("[Submit"),
         take_until("\n\n# "),
-    ))(input)
+    ))
+    .parse(input)
     {
         Ok((_, quote)) => Ok(quote.trim()),
         Err::<_, nom::Err<nom::error::Error<&str>>>(err) => {
