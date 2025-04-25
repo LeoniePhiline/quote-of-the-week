@@ -12,7 +12,7 @@ publish = false
 [dependencies]
 chrono = { version = "0.4.38", default-features = false }
 color-eyre = { version = "0.6.3", default-features = false, features = ["track-caller"] }
-gix = { version = "0.70.0", default-features = false, features = ["interrupt", "worktree-mutation", "blocking-http-transport-reqwest-rust-tls"] }
+gix = { version = "0.71.0", default-features = false, features = ["interrupt", "worktree-mutation", "blocking-http-transport-reqwest-rust-tls"] }
 nom = "7.1.3"
 
 [dev-dependencies]
@@ -37,7 +37,6 @@ unused = { level = "warn", priority = -1 }
 unused_crate_dependencies = "warn"
 unused_lifetimes = "warn"
 
-pointer_structural_match = "deny"
 # lossy_provenance_casts = "deny" # https://github.com/rust-lang/rust/issues/95228
 # fuzzy_provenance_casts = "deny" # https://github.com/rust-lang/rust/issues/95228
 unsafe_code = "deny" # Exceptions must be discussed and deemed indispensable and use `#![deny(invalid_reference_casting, unsafe_op_in_unsafe_fn)]`.

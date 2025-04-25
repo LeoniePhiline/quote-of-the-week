@@ -211,7 +211,7 @@ fn git_clone(src: &str, dest: &Path) -> Result<()> {
 
     println!(
         "Checking out into {:?} ...",
-        prepare_checkout.repo().work_dir().expect("should be there")
+        prepare_checkout.repo().workdir().expect("should be there")
     );
 
     prepare_checkout.main_worktree(gix::progress::Discard, &gix::interrupt::IS_INTERRUPTED)?;
