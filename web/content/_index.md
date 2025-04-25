@@ -1622,7 +1622,7 @@ Thanks to [ErichDonGubler and CAD97 for the suggestion](https://users.rust-lang.
 
 ## 2018-01-23 - Quote of the Week
 
-> Rust is difficult because most programmers abuse shared mutable state and Rust makes you sacrifice your first-born to be able to to do it.
+> Rust is difficult because most programmers abuse shared mutable state and Rust makes you sacrifice your first-born to be able to do it.
 
 — [u/_errata_ on reddit](https://www.reddit.com/r/rust/comments/7rza1q/why_is_rust_difficult/dt11dqx/).
 
@@ -1805,7 +1805,7 @@ Thanks to [DPC](https://users.rust-lang.org/u/dylan.dpc) for the suggestion!
 
 ## 2018-07-10 - Quote of the Week
 
-> actix-web has removed all unsound use of unsafe in its codebase. It’s down to less than 15 occurences of unsafe from 100+.
+> actix-web has removed all unsound use of unsafe in its codebase. It’s down to less than 15 occurrences of unsafe from 100+.
 
 – [u/_ar7 celebrating this commendable achievement](https://www.reddit.com/r/rust/comments/8wlkbe/actixweb_has_removed_all_unsound_use_of_unsafe_in/).
 
@@ -4926,5 +4926,564 @@ Thanks to [Dennis Luxen](https://users.rust-lang.org/t/twir-quote-of-the-week/32
 – [Carol (Nichols || Goulding) on rust-internals](https://internals.rust-lang.org/t/exclude-bots-from-contributors/20516/5)
 
 Thanks to [Anton Fetisov](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1552) for the suggestion!
+
+
+## 2024-04-03 - Quote of the Week
+
+> Panstromek: I remember reading somewhere (probably here) that borrow checking has `O(n^3)` asymptotic complexity, relative to the size of the function.
+>
+> Nadrieril: Compared to match exhaustiveness which is NP-hard and trait solving which is undecidable, a polynomial complexity feels refreshingly sane.
+
+– [Panstromek and Nadrieril on zulip](https://rust-lang.zulipchat.com/#narrow/stream/131828-t-compiler/topic/Is.20Borrow.20Checking.20Cubic.3F/near/429533622)
+
+Thanks to [Kevin Reid](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1553) for the suggestion!
+
+
+## 2024-04-10 - Quote of the Week
+
+> As a former JavaScript plebeian who has only been semi-recently illuminated by the suspiciously pastel pink, white and blue radiance of Rust developers, NOT having to sit in my web console debugger for hours pushing some lovingly crafted `[object Object]` or `undefined` is a blessing.
+
+– [Julien Robert rage-blogging against bevy](https://oneirical.github.io/bevyrage)
+
+Thanks to [scottmcm](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1558) for the suggestion!
+
+
+## 2024-04-17 - Quote of the Week
+
+> There is absolutely no way I can imagine that `Option` is causing that error. That'd be like turning on the "Hide Taskbar" setting causing your GPU to catch fire.
+>
+> [...]
+>
+> If it's not any of those, consider an exorcist because your machine *might* be haunted.
+
+– [Daniel Keep on rust-users](https://users.rust-lang.org/t/access-is-denied-os-error-5/109515/2)
+
+Thanks to [Hayden Brown](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1561) for the suggestion!
+
+
+## 2024-04-24 - Quote of the Week
+
+> The learning curve for Rust is relatively steep compared to other languages, but once you climb it you'll never look down.
+
+– [BD103 on Mastodon](https://hachyderm.io/@bd103/112318610927827520)
+
+Thanks to [BD103](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1563) for the self-suggestion!
+
+
+## 2024-05-01 - Quote of the Week
+
+> "I'll never!"
+> "No, never is in the 2024 Edition."
+> "But never can't be this year, it's never!"
+> "Well we're trying to make it happen now!"
+> "But never isn't now?" "I mean technically, now never is the unit."
+> "But how do you have an entire unit if it never happens?"
+
+– [Jubilee on Zulip](https://rust-lang.zulipchat.com/#narrow/stream/268952-edition/topic/should.20have.20been.202025.20edition/near/435845944)
+
+Thanks to [Jacob Pratt](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1565) for the suggestion!
+
+
+## 2024-05-08 - Quote of the Week
+
+> Rust and its borrow checker are like proper form when lifting boxes. While you might have been lifting boxes "the natural way" for decades without a problem, and its an initial embuggerance to think and perform proper lifting form, it is learnable, efficient, and prevents some important problems.
+>
+> Or more succinctly:  
+> C/C++: It'll screw your back(end).
+
+And the reply:
+
+> 1. there’s a largish group of men who would feel their masculinity attacked if you implied they should learn it
+> 2. while it's learnable finding usefully targeted educational resources are hard to come by
+> 3. proper form while lifting boxes are a really terrible way to model graphs
+
+– [Brett Witty and Leon on Mastodon](https://mstdn.social/@brettwitty/111734369720814683)
+
+Thanks to [Brett Witty](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1566) for the self-suggestion!
+
+
+## 2024-05-15 - Quote of the Week
+
+> Unfortunately, most people seem to have taken the wrong lesson from Rust. They see all of this business with lifetimes and ownership as a dirty mess that Rust has had to adopt because it wanted to avoid garbage collection. But this is completely backwards! Rust adopted rules around shared mutable state and this enabled it to avoid garbage collection. These rules are a good idea regardless.
+
+– [without boats](https://without.boats/blog/references-are-like-jumps/)
+
+Thanks to [Jules Bertholet](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1567) for the last-minute suggestion!
+
+
+## 2024-05-22 - Quote of the Week
+
+> In other words, I do not want the compiler to just insert code to uphold the bare minimum guarantees, I want the compiler to check my work for me and assist me in developing an algorithm I can confidently assert is right.
+
+– [without boats](https://without.boats/blog/references-are-like-jumps/)
+
+Thanks to [scottmcm](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1568) for the suggestion!
+
+
+## 2024-05-29 - Quote of the Week
+
+> I’ve said it before and I’ll say it again: as a child of OCaml and C++, Rust currently is the best language for production compiler-shaped things.
+
+– [Alex Kladov on lobste.rs](https://lobste.rs/s/hjmrl1/how_we_migrated_our_static_analyzer_from#c_amxgiq)
+
+Thanks to [Stephan Sokolow](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1570) for the suggestion!
+
+
+## 2024-06-05 - Quote of the Week
+
+> Every PR is Special™
+
+– [Hieyou Xu describing being on t-compiler review rotation](https://jieyouxu.github.io/blog/review-rotation/)
+
+Sadly, there was no suggestion, so llogiq came up with something hopefully suitable.
+
+
+## 2024-06-12 - Quote of the Week
+
+> I like explicit but I hate noise...
+
+– [dlevac discussing error handling on /r/golang](https://www.reddit.com/r/golang/comments/1d7tswh/comment/l71of8o/)
+
+Thanks to [robin](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1571) for the suggestion!
+
+
+## 2024-06-19 - Quote of the Week
+
+> If there’s a backdoor attack lurking in the crates ecosystem, then it’s lurking pretty deep at present. The popular crates that we all rely on day to day generally appear to be what they say they are.
+
+– [Adam Harvey on his blog](https://lawngno.me/blog/2024/06/10/divine-provenance.html)
+
+Thanks to [Brian Kung](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1575) for the suggestion!
+
+
+## 2024-06-26 - Quote of the Week
+
+> Rust has no theoretical inconsistencies... a remarkable achievement...
+
+– [Simon Peyton-Jones on YouTube](https://youtu.be/UBgam9XUHs0?t=2756)
+
+Thanks to [ZiCog](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1579) for the suggestion and [Simon Farnsworth](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1580) for the improved link!
+
+
+## 2024-07-03 - Quote of the Week
+
+> the compiler usually doesn't complain about \[you\] doing undefined behavior because it doesn't know that you're doing undefined behavior.
+
+– [Nilstrieb on GitHub](https://github.com/rust-lang/rust/issues/125658#issuecomment-2135511362)
+
+Thanks to [scottmcm](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1589) for the suggestion!
+
+
+## 2024-07-10 - Quote of the Week
+
+> In Rust, the preferred solution is to avoid the need for such document to exist.
+
+– [Kornel on rust-users replying to a question about Rust code guidelines](https://users.rust-lang.org/t/is-there-something-like-rust-core-guidelines-like-c-core-guidelines/113850/3)
+
+Thanks to [Chayim Refael Friedman](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1590?u=llogiq) for the suggestion!
+
+
+## 2024-07-17 - Quote of the Week
+
+> I have a dream. A dream that Cargo has its own release cadence, so it is free from the strict stability curse and can then ship major version releases.
+
+– [Weihang Lo on their blog](https://weihanglo.tw/posts/2024/the-missing-parts-in-cargo/)
+
+Thanks to [Brian Kung](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1591) for the suggestion!
+
+
+## 2024-07-24 - Quote of the Week
+
+> Rust doesn't give you good errors, it gives you control over errors.
+
+– [cameronm1024 on r/rust](https://www.reddit.com/r/rust/comments/1e978l7/ive_used_and_loved_rust_for_10_years_here_are_the/lecp79z/)
+
+Despite a woeful dearth of suggestions, llogiq is content with his choice.
+
+
+## 2024-07-31 - Quote of the Week
+
+> Man, rust crates are so allergic to 1.0 that they'll skip all the way to version 22.
+
+– [/u/darkpyro2 on /r/rust](https://www.reddit.com/r/rust/comments/1e6j8sk/comment/ldv61bm/)
+
+Thanks to [Erich Gubler](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1593) for the suggestion!
+
+
+## 2024-08-07 - Quote of the Week
+
+> Want to have a crate with a million features? Host your own registry and revel in the combinatorial explosion of choices!
+
+– [Jake Goulding on rust-users](https://users.rust-lang.org/t/margo-a-simple-cargo-registry-using-static-files/115412)
+
+Thanks to [Jonas Fassbender](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1599) for the suggestion!
+
+
+## 2024-08-14 - Quote of the Week
+
+> We are living through Rust finding its more "complete" form while still being an actually useful production language.
+
+– [Catherine West on /r/rust](https://old.reddit.com/r/rust/comments/1eq357a/ive_been_working_with_rust_for_a_couple_years_now/lhu5ag2/)
+
+Given a woeful lack of suggestions, llogiq is reasonably pleased with his choice.
+
+
+## 2024-08-21 - Quote of the Week
+
+> I'm trying to round up to next power of two (for fun).
+
+> I know that's perhaps not a lot of fun, but there's [next_power_of_two() ](https://doc.rust-lang.org/std/primitive.u32.html#method.next_power_of_two) on all integer types.
+
+> That is indeed less fun.
+
+– [Edeadlink and Riccardo Borgani on rust-users](https://users.rust-lang.org/t/stupid-or-genius-getting-at-the-bits/116138)
+
+Thanks to [Jonas Fassbender](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1600) for the suggestion!
+
+
+## 2024-08-28 - Quote of the Week
+
+> ... opaque number sequences (\<GitHub\> "issue numbers") are not very informative about what is behind that pointer, and pretending they are is harmful. People could provide, instead, actual reasons for things, which do not require dereferencing random pointers, which thrashes cache.
+
+– [Jubilee on rust-internals](https://internals.rust-lang.org/t/type-inference-breakage-in-1-80-has-not-been-handled-well/21374/29)
+
+Thanks to [Anton Fetisov](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1603) for the suggestion!
+
+
+## 2024-09-04 - Quote of the Week
+
+> I'm pretty sure I'm the only person ever to single handedly write a complex GPU kernel driver that has never had a memory safety kernel panic bug (itself) in production, running on thousands of users' systems for 1.5 years now.
+>
+> Because I wrote it in Rust.
+
+– [Asahi Lina on vt.social](https://vt.social/@lina/113045456734886438)
+
+Thanks to [Ludwig Stecher](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1604) for the suggestion!
+
+
+## 2024-09-11 - Quote of the Week
+
+> Alas! We are once more bereft  
+> of a quote to elate or explain  
+> so this editor merely has left  
+> the option in rhyme to complain.
+
+– llogiq
+
+
+## 2024-09-18 - Quote of the Week
+
+> \[Rust\] is a conspiracy to popularize programing language concepts from the 80s
+
+– [Esteban Küber on hachyderm](https://hachyderm.io/@ekuber/113130426545931814)
+
+[llogiq](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1610) is quite thankful to himself for the suggestion!
+
+
+## 2024-09-25 - Quote of the Week
+
+> New users feel like iteration times are so slow and it takes forever to get going with Rust. But if there's a library available, I feel like I'm roughly as productive with Rust as I am with Ruby, if not more, when I think about the whole amount of work I'm doing. I haven't really figured out how to talk about that without sounding purely like a zealot, but yeah, I feel like Rust is actually very, very productive, even though many people don't see it that way initially.
+
+– [Steve Klabnik at Oxidize Conference](https://youtu.be/q8qn0dyT3xc?t=2784)
+
+Thanks to [Brian Kung](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1611) for the suggestion!
+
+
+## 2024-10-02 - Quote of the Week
+
+> Just to provide another perspective: if you can write the programs you want to write, then all is good. You don't have to use every single tool in the standard library.
+>
+> I co-authored the Rust book. I have twelve years experience writing Rust code, and just over thirty years of experience writing software. I have written a macro_rules macro exactly one time, and that was 95% taking someone else's macro and modifying it. I have written one proc macro. I have used Box::leak once. I have never used Arc::downgrade. I've used Cow a handful of times.
+>
+> Don't stress yourself out. You're doing fine.
+
+– [Steve Klabnik on r/rust](https://www.reddit.com/r/rust/comments/1fofg43/comment/lopwnyd/)
+
+Thanks to [Jacob Finkelman](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1614) for the suggestion!
+
+
+## 2024-10-09 - Quote of the Week
+
+> I'm the wrong side of 45. I have zero interest in wasting any time that I might have left writing C from scratch. Writing Rust is pure joy. I can go from an idea to a working, tested, robust, published and packaged implementation in the time it would take me to even begin the first few lines of a C version. The tooling is beautiful, makes programming fun, and the end result usually outperforms the equivalent C. Once it builds I know it will run perfectly on all of the platforms I care about, and I don't have to go around manually testing on them to find all of the various platform and compiler quirks that will break it.
+
+– [Jonathan Perkins on the NetBSD mailing list](http://mail-index.netbsd.org/pkgsrc-users/2024/08/25/msg040053.html)
+
+Thanks to [blonk](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1617) for the suggestion!
+
+
+## 2024-10-16 - Quote of the Week
+
+> We'd have buttons on the screen to control the fans of the car. I had to write a lot of code before I could compile it all, a big jenga tower. But once it compiled, the fans started to work! Very impressed.
+
+– [Julius Gustavsson on the Tweedegolf blog](https://tweedegolf.nl/en/blog/137/rust-is-rolling-off-the-volvo-assembly-line)
+
+Thanks to [scottmcm](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1619) for the suggestion!
+
+
+## 2024-10-23 - Quote of the Week
+
+> Your problem is that you’re trying to borrow from the dead.
+
+– [/u/masklinn on /r/rust](https://old.reddit.com/r/rust/comments/1g3a2ul/hey_rustaceans_got_a_question_ask_here_422024/lrzqed7/)
+
+Thanks to [Maciej Dziardziel](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1622) for the suggestion!
+
+
+## 2024-10-30 - Quote of the Week
+
+> An earnest effort to pursue \[[P1179R1](https://wg21.link/p1179r1)\] as a Lifetime TS\[[P3465R0](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2024/p3465r0.pdf)\] will compromise on C++’s outdated and unworkable core principles and adopt mechanisms more like Rust’s. In the compiler business this is called *carcinization*: a tendency of non-crab organisms to evolve crab-like features.
+– [Sean Baxter on circle-lang.org](https://www.circle-lang.org/draft-profiles.html#carcinization)
+
+Thanks to [Collin Richards](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1627) for the suggestion!
+
+
+## 2024-11-06 - Quote of the Week
+
+> Any sufficiently complicated C project contains an adhoc, informally specified, bug ridden, slow implementation of half of cargo.
+
+– [Folkert de Vries at RustNL 2024 (youtube recording)](https://www.youtube.com/watch?v=mvzHQdCLkOY&t=912s)
+
+Thanks to [Collin Richards](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1629) for the suggestion!
+
+
+## 2024-11-13 - Quote of the Week
+
+> Netstack3 encompasses 63 crates and 60 developer-years of code. It contains more code than the top ten crates on [crates.io](https://crates.io/) combined. ... For the past eleven months, they have been running the new networking stack on 60 devices, full time. In that time, Liebow-Feeser said, most code would have been expected to show "mountains of bugs". Netstack3 had only three; he attributed that low number to the team's approach of encoding as many important invariants in the type system as possible.
+
+– [Joshua Liebow-Feeser at RustConf, as reported by Daroc Alden on Linux Weekly News](https://lwn.net/SubscriberLink/995814/17e451bcb3015920/)
+
+Thanks to [Anton Fetisov](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1630) for the suggestion!
+
+
+## 2024-11-20 - Quote of the Week
+
+> The whole point of Rust is that before there were two worlds:
+>
+> * Inefficient, garbage collected, reliable languages
+> * Efficient, manually allocated, dangerous languages
+>
+> And the mark of being a good developer in the first was mitigating the inefficiency well, and for the second it was it didn't crash, corrupt memory, or be riddled with security issues. Rust makes the trade-off instead that being good means understanding how to avoid the compiler yelling at you.
+
+– [Simon Buchan on rust-users]()
+
+Thanks to [binarycat](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1632) for the suggestion!
+
+
+## 2024-11-27 - Quote of the Week
+
+> Will never stop being positively surprised by clippy
+>
+> ```text
+> error: hypothenuse can be computed more accurately:
+>    --> src/main.rs:835:5
+>     |
+> 835 |     (width * width + height * height).sqrt() / diag
+>     |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: consider using `width.hypot(height)`
+>     |
+> help: for further information, visit https://rust-lang.github.io/rust-clippy/master/index.html#imprecise_flops
+> ```
+
+- [Manos Pitsidianakis (and rust-clippy) on Mastodon](https://chaos.social/@epilys/113538172289599584)
+
+llogiq is quite self-appreciative regarding [his suggestion](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1633).
+
+
+## 2024-12-04 - Quote of the Week
+
+> "self own" sounds like a rust thing
+
+– [ionchy on Mastodon](https://types.pl/@ionchy/113567387219906256)
+
+Thanks to [Jacob Pratt](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1636) for the suggestion!
+
+
+## 2024-12-11 - Quote of the Week
+
+> Memory-safe implementations of PNG ([png](https://crates.io/crates/png), [zune-png](https://crates.io/crates/zune-png), [wuffs](https://github.com/google/wuffs/)) now dramatically outperform memory-unsafe ones ([libpng](http://www.libpng.org/), [spng](https://libspng.org/), [stb_image](https://github.com/nothings/stb)) when decoding images.
+>
+> Rust [png](https://crates.io/crates/png) crate that tops our benchmark shows **1.8x** improvement over `libpng` on x86 and **1.5x** improvement on ARM.
+
+– [Shnatsel on /r/rust](https://www.reddit.com/r/rust/comments/1ha7uyi/memorysafe_png_decoders_now_vastly_outperform_c/)
+
+Thanks to [Anton Fetisov](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1641) for the suggestion!
+
+
+## 2024-12-18 - Quote of the Week
+
+> She said yes!! (And so did I!)
+
+– [Amos on Mastodon](https://hachyderm.io/@fasterthanlime/113639047728482697) proving that Rustaceans *do* have a life outside of Rust. Congratulations, Amos!
+
+Thanks to [Jacob Pratt](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1642) for the suggestion!
+
+
+## 2024-12-25 - Quote of the Week
+
+> It's only a transmute if it's from the transmute region of std; otherwise it's just sparkling unsafety.
+
+– [Josh Triplett on github](https://github.com/rust-lang/rust/pull/128351#issuecomment-2552304484)
+
+Thanks to [Josh](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1645) for the self-suggestion!
+
+
+## 2025-01-01 - Quote of the Week
+
+> Hear, hear! Rust is the real deep state. They knew all along that memory-related bugs would dominate the Vulnerability Rating Taxonomy. Coincidence? I think not. 🐛🔧
+
+– [@amoghavarsha@infosec.exchange on mastodon](https://infosec.exchange/@amoghavarsha/113741018641283042)
+
+Thanks to [llogiq](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1646) for the suggestion!
+
+
+## 2025-01-08 - Quote of the Week
+
+> Also, there is often a trade-off between accuracy and education. For example, when I correct my toddler that the Sun is actually not moving, but we are rotating. That's wrong, the Sun *is* moving, but arguably less wrong than his impression. (I once tried to give him the full explanation, but halfway through he ran away to play with his trains.)
+>
+> Not that readers of the Rust book are toddlers, but the principle generalizes in my experience.
+
+– [Andrew Gallant a.k.a. @BurntSushi on rust-users](https://users.rust-lang.org/t/why-do-some-people-confound-t-with-stack-memory/123336/8)
+
+Thanks to [Aleksander Krauze](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1648) for the suggestion!
+
+
+## 2025-01-15 - Quote of the Week
+
+> This is a wonderful unsoundness and I am incredibly excited about it :3
+
+– [lcnr on github](https://github.com/rust-lang/rust/issues/135011#issuecomment-2573248261)
+
+Thanks to [Christoph Grenz](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1650) for the suggestion!
+
+
+## 2025-01-22 - Quote of the Week
+
+> Memory safety issues mean you can’t trust what you’re seeing in your source code anymore.
+
+– [Someone from Antithesis on the shuttle blog](https://www.shuttle.dev/blog/2025/01/14/the-appeal-of-rust)
+
+Thanks to [scottmcm](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1651) for the suggestion!
+
+
+## 2025-01-29 - Quote of the Week
+
+> I have experience in multiple styles of MMA gained from fighting the borrow checker, if that counts.
+
+– [Richard Neumann on rust-users](https://users.rust-lang.org/t/is-it-worth-getting-a-degree-in-rust/124678/2)
+
+Thanks to [Jonas Fassbender](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1654) for the suggestion!
+
+
+## 2025-02-05 - Quote of the Week
+
+> If your rust code compiles and you don't use "unsafe", that is a pretty good certification.
+
+– [Richard Gould about Rust certifications on rust-users](https://users.rust-lang.org/t/recognized-rust-certification/124906/11)
+
+Thanks to [ZiCog](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1657) for the suggestion!
+
+
+## 2025-02-12 - Quote of the Week
+
+> Just because things are useful doesn't mean they are magically sound.
+
+– [Ralf Jung on github](https://github.com/rust-lang/rust/issues/132442#issuecomment-2636065726)
+
+Thanks to [scottmcm](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1658) for the suggestion!
+
+
+## 2025-02-19 - Quote of the Week
+
+> I have found that many automated code review tools, including LLMs, catch 10 out of 3 bugs.
+
+– [Josh Triplett on r/rust](https://old.reddit.com/r/rust/comments/1ink5qf/niko_matsakis_how_i_learned_to_stop_worrying_and/mcdkg36/)
+
+Despite a lamentable lack of suggestions, llogiq is properly pleased with his choice.
+
+
+## 2025-02-26 - Quote of the Week
+
+> Rust isn't a "silver bullet" that will solve all of our problems, but it
+sure will help in a huge number of places, so for new stuff going
+forward, why wouldn't we want that?
+
+– [Greg Kroah-Hartmann on the Linux Kernel Mailing List](https://lore.kernel.org/rust-for-linux/2025021954-flaccid-pucker-f7d9@gregkh/)
+
+Thanks to [Krishna Sundarram](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1660) for the suggestion!
+
+
+## 2025-03-05 - Quote of the Week
+
+> The performance impact of moving to Rust – and this is a common theme across everything done when we've moved from C/C++ to Rust – we saw a 5 to 15% performance Improvement.
+>
+> I'll say that one of the ways that you could attack that kind of stat is say well you rewrote it so whenever you rewrite something you're going to improve it and if you'd rewritten it in C or C++ you would have also seen an improvement like that but the fact is we did not intend to get a performance Improvement. This was purely a porting exercise and we saw this now.
+>
+> And the other aspect of this is that we never see performance regressions either when we're doing our ports [...]
+
+– [Mark Russinovich at RustNationUK '25'](https://youtu.be/1VgptLwP588?feature=shared&t=414)
+
+Despite lacking suggestions, llogiq is quite pleased with his choice.
+
+
+## 2025-03-12 - Quote of the Week
+
+> Treat *anything* starting with `cargo` as if it is `cargo run`. This applies even to commands that do not build anything, such as `cargo clean`, and third-party plugins, such as `cargo audit`.
+
+– [Sergey "Shnatsel" Davidoff on /r/rust](https://old.reddit.com/r/rust/comments/1j2i3s0/psa_do_not_run_any_cargo_commands_on_untrusted)
+
+Thanks to [llogiq](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1661) for the suggestion!
+
+
+## 2025-03-19 - Quote of the Week
+
+> Probably a terrible idea, but I enjoy throwing ideas at the wall, and seeing how sharp their broken fragments are.
+
+– [Katt on the RFC #3762 discussion](https://github.com/rust-lang/rfcs/pull/3762#discussion_r1990901450)
+
+Thanks to [Jacob Lifshay](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1662) for the suggestion!
+
+
+## 2025-03-26 - Quote of the Week
+
+> Did it work? It’s Rust, so it worked on the first try!
+
+– [James Calligeros on the Asahi progress report](https://asahilinux.org/2025/03/progress-report-6-14/)
+
+Thanks to [yerke](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1663) for the suggestion!
+
+
+## 2025-04-02 - Quote of the Week
+
+> If you write a bug in your Rust program, Rust doesn’t blame you. Rust asks “how could the compiler have spotted that bug”. 
+
+– [Ian Jackson blogging about Rust](https://diziet.dreamwidth.org/19480.html)
+
+Despite a lack of suggestions, llogiq is quite pleased with his choice.
+
+
+## 2025-04-09 - Quote of the Week
+
+> The moment I froze Doctest with a loop in a comment.
+
+– [/u/HaMMeReD describing their first Rust Whoa! moment on /r/rust](https://www.reddit.com/r/rust/comments/1jrmuj6/what_is_your_woah_moment_in_rust/mlg9ns4/)
+
+Despite a lack of suggestions, llogiq is content with his choice.
+
+
+## 2025-04-16 - Quote of the Week
+
+> IEEE 754 floating point, proudly providing counterexamples since 1985!
+
+– [Johannes Dahlström on rust-internals](https://internals.rust-lang.org/t/highlight-differences-in-assert-eq/22722/4)
+
+Thanks to [Ralf Jung](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1665) for the suggestion!
+
+
+## 2025-04-23 - Quote of the Week
+
+> I don’t think about rust either. That’s a compiler’s job
+
+– [Steve Klabnik on Bluesky](https://bsky.app/profile/steveklabnik.com/post/3lmtavr5ni22l)
+
+Thanks to [Matt Wismer](https://users.rust-lang.org/t/twir-quote-of-the-week/328/1677) for the suggestion!
 
 
