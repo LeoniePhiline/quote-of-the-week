@@ -9,5 +9,5 @@ docker run \
   --volume "$PWD"/web:/app \
   --workdir /app \
   --publish 8080:8080 \
-  ghcr.io/getzola/zola:v0.20.0@sha256:c1c1be412af48740e37f25faf9b5cb7eeee5e52d9885f51a34479a385c9cc1e3 \
+  ghcr.io/getzola/zola:v0.20.0@sha256:362e902e9d1e49d3da6b5d80efa982e0696dbb4f211ef8180cfbf210b10356be \
   "$@"
