@@ -214,8 +214,8 @@ fn git_clone(src: &str, dest: &Path) -> Result<()> {
     .wrap_err("failed to fetch, then checkout")?;
 
     println!(
-        "Checking out into {:?} ...",
-        prepare_checkout.repo().workdir().expect("should be there")
+        "Checking out into '{}' ...",
+        prepare_checkout.repo().workdir().expect("should be there").display()
     );
 
     prepare_checkout.main_worktree(gix::progress::Discard, &gix::interrupt::IS_INTERRUPTED)?;
